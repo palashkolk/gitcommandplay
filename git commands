@@ -1,0 +1,6 @@
+git commit --amend == recent commit edit (by deleting old and creating new)
+
+git rebase -i HEAD~2 === rebases git head 2 commit back from current HEAD
+change pick to edit where change is required
+git commit --amend == lets you edit the commits
+git rebase --continue == brings back to latest HEAD
