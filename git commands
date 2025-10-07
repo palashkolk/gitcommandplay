@@ -1,6 +1,26 @@
-git commit --amend == recent commit edit (by deleting old and creating new)
+git commit --amend == recent commit edit (by deleting old and creating new, only amend commits that have not been pushed anywhere! )
 
 git rebase -i HEAD~2 === rebases git head 2 commit back from current HEAD
 change pick to edit where change is required
 git commit --amend == lets you edit the commits
 git rebase --continue == brings back to latest HEAD
+
+
+git rebase -i --root => shows all the commits
+Use squash for squashing the commits to its previous commit
+Complete editing and exit
+
+git reset HEAD~  => Resets commit to the one right before HEAD, git reset also updates the staging area with contents of wherever HEAD is pointing now
+
+git reset --soft ==> HEAD is moved and staging area remains untouched. In above command staging area is touched. (Instead of changing the last commit, you can go back multiple commits and combine all the changes included in them into one commit.)
+
+
+git reset --hard ==> Even mofdifies the files in working directory to make it look like the staging area of the wherever HEAD ends up pointing to. So data loose occurs.
+
+
+git reset --hard is similar to git commit --amend ==> changes history/destructive
+
+
+
+
+
