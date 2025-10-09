@@ -10,7 +10,7 @@ git rebase -i --root => shows all the commits
 Use squash for squashing the commits to its previous commit
 Complete editing and exit
 
-git reset HEAD~  => Resets commit to the one right before HEAD, git reset also updates the staging area with contents of wherever HEAD is pointing now
+git reset HEAD~  => Resets commit to the one right before HEAD, git reset also updates the staging area with contents of wherever HEAD is pointing now. So may have to stage again.
 
 git reset --soft ==> HEAD is moved and staging area remains untouched. In above command staging area is touched. (Instead of changing the last commit, you can go back multiple commits and combine all the changes included in them into one commit.)
 
@@ -21,6 +21,76 @@ git reset --hard ==> Even mofdifies the files in working directory to make it lo
 git reset --hard is similar to git commit --amend ==> changes history/destructive
 
 
+git checkout -b bugFix ==> creating and moving to new branch
+git merge bugFix ==> while on main merges bugFix to main line.
+git checkout bugFix, git merge main ==> brings bugFix to main as it was an ancestor comment
+
+HEAD movement around tree is done with=>
+git checkout name
+git checkout -b feature C2 ==> Creates feature at C2
+git checkout commit ==> brings out HEAD out of branch name
+git checkout C1^ ==> moves HEAD 1 step back from C1
+git checkout bugFix^ ==> moves HEAD 1 step back
+git checkout HEAD^ ==> moves HEAD 1 step back
+git checkout HEAD~2 ==> moves HEAD 2 step back
 
 
+moving work/branch around the tree==>
+git cherry-pick C1 C3 C5 etc ==> picks commits and plants on the current head. Branch moves ahead with new commit.
+git branch -f name location
+git branch -f main HEAD~3
+
+History alteration done with=>
+git rebase C0 C1 ==> head currently on C0, wants to attach C1 line on top of C0
+
+git rebase -i location ==> and then change order, drop commits etc in editor
+                           Commits shown are ==> Commits from current head to location
+                           again plants or drops the commits in the revised order from the location for the current branch
+
+location=> where the rebase stops for editing. and moves from there
+after incorporating the edited commits in the order specified.
+In the end of tree branch points to to the last commit
+
+
+git commit --amend ==> amends last commit. Can be used with
+                      "git rebase -i" after altering the order of the commits
+                       and applying the amend on a previous commit as it is now latest.
+                       We can again use rebase to correct back the order of commits.
+
+
+Undo changes==>
+git reset HEAD~1 ==> move branch backward as if commit never occured
+                      Above command is good for local files
+git reverse HEAD ==> New commit reverses changes of previous commit
+                     works good on remote repo as yopu can push your change to share
+
+
+git tag v1 location ==> Creates tag (marker) at location
+
+git describe ==> Describes current head wrt nearest tag
+
+git branch bugWork HEAD~^2~ ==> creates a branch 'bugWork' few commits back on the main line
+
+
+git fetch ==> brings updates from remote repo and updates o/main branch on local repo
+git pull == git fetch/git merge==> Also shifts the preset head to latest commit
+
+
+git pull --rebase ==> pulls and rebases local work on top of remote
+
+
+Changing the default (main) remote tracking branch=====
+git checkout -b totallyNotMain o/main ==> Creates local branch totallyNotMain which tracks remote main (o/main)
+git branch -u o/main foo ==> sets foo branch to track o/main
+git branch -u o/main ==> Use when foo is checked out
+
+===git push=====
+git push ==> Publishes work to remote repo
+--colon refspecs----
+git push origin <source>:<destination> ==> if source and destination branch names are different
+git push origin foo^:main ==> Updates commits upto foo^ on main
+
+==empty source===
+git push origin :foo ==> deletes foo branch on repote repo
+git fetch origin :bar ==> creates new branch bar on local
 
