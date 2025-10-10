@@ -12,13 +12,6 @@ Complete editing and exit
 
 git reset HEAD~  => Resets commit to the one right before HEAD, git reset also updates the staging area with contents of wherever HEAD is pointing now. So may have to stage again.
 
-git reset --soft ==> HEAD is moved and staging area remains untouched. In above command staging area is touched. (Instead of changing the last commit, you can go back multiple commits and combine all the changes included in them into one commit.)
-
-
-git reset --hard ==> Even mofdifies the files in working directory to make it look like the staging area of the wherever HEAD ends up pointing to. So data loose occurs.
-
-
-git reset --hard is similar to git commit --amend ==> changes history/destructive
 
 
 git checkout -b bugFix ==> creating and moving to new branch
@@ -35,7 +28,7 @@ git checkout HEAD^ ==> moves HEAD 1 step back
 git checkout HEAD~2 ==> moves HEAD 2 step back
 
 
-moving work/branch around the tree==>
+moving commit work/branch around the tree==>
 git cherry-pick C1 C3 C5 etc ==> picks commits and plants on the current head. Branch moves ahead with new commit.
 git branch -f name location
 git branch -f main HEAD~3
@@ -51,18 +44,20 @@ location=> where the rebase stops for editing. and moves from there
 after incorporating the edited commits in the order specified.
 In the end of tree branch points to to the last commit
 
-
-git commit --amend ==> amends last commit. Can be used with
-                      "git rebase -i" after altering the order of the commits
+"git rebase -i" after altering the order of the commits
                        and applying the amend on a previous commit as it is now latest.
                        We can again use rebase to correct back the order of commits.
 
 
-Undo changes==>
+===Undo changes==>
+git commit --amend ==> amends last commit. Can be used with
 git reset HEAD~1 ==> move branch backward as if commit never occured
                       Above command is good for local files
-git reverse HEAD ==> New commit reverses changes of previous commit
+git revert HEAD ==> New commit reverses changes of previous commit
                      works good on remote repo as yopu can push your change to share
+git reset --soft ==> HEAD is moved and staging area remains untouched. In above command staging area is touched. (Instead of changing the last commit, you can go back multiple commits and combine all the changes included in them into one commit.)
+git reset --hard ==> Even mofdifies the files in working directory to make it look like the staging area of the wherever HEAD ends up pointing to. So data loose occurs.
+git reset --hard is similar to git commit --amend ==> changes history/destructive
 
 
 git tag v1 location ==> Creates tag (marker) at location
@@ -89,6 +84,9 @@ git push ==> Publishes work to remote repo
 --colon refspecs----
 git push origin <source>:<destination> ==> if source and destination branch names are different
 git push origin foo^:main ==> Updates commits upto foo^ on main
+git push --force == dangerous, should be used with caution when collab with others
+git push --force-with-lease
+
 
 ==empty source===
 git push origin :foo ==> deletes foo branch on repote repo
