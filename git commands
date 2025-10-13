@@ -92,3 +92,14 @@ git push --force-with-lease
 git push origin :foo ==> deletes foo branch on repote repo
 git fetch origin :bar ==> creates new branch bar on local
 
+==remote====
+git remote add upstream git@github.com:TheOdinProject/curriculum.git
+
+Contributing to open source====
+Repo/upstream == Original repo
+Issue == Comment on issue to get assignment
+Origin === Your fork
+local repo == clone of fork
+Only pull from upstream and can not push
+
+--Contributing guide
